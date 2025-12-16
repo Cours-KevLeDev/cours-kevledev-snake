@@ -8,11 +8,14 @@ import readline from 'node:readline'
  * Version: 2.0.0
  */
 
+let _screenHeight = process.stdout.rows
+let _screenWidth = process.stdout.columns
 /**
  * Graphics buffer
  */
-let gfxbuffer = Array(process.stdout.rows).fill(' '.repeat(process.stdout.columns))
+let gfxbuffer = Array(_screenHeight).fill(' '.repeat(_screenWidth))
 let bufferchanged = false
+
 /**
  * Draw the gfx buffer
  */
@@ -59,7 +62,9 @@ export function initTerminal2DEngine(fps) {
  * Clear the screen and remove everything that was draw before
  */
 export function clear() {
-	gfxbuffer = Array(process.stdout.rows).fill(' '.repeat(process.stdout.columns))
+	_screenHeight = process.stdout.rows
+	_screenWidth = process.stdout.columns
+	gfxbuffer = Array(_screenHeight).fill(' '.repeat(_screenWidth))
 }
 
 /**
@@ -117,4 +122,20 @@ export function drawString(x, y, str) {
 	// On la remplace dans le buffer, en faisant attention de ne pas excéder la longueur déjà présente
 	gfxbuffer[y] = line.substring(0, gfxbuffer[y].length)
 	bufferchanged = true
+}
+
+/**
+ * Get the current screen height
+ * @returns {number} the screen height (in number of characters)
+ */
+export function getScreenHeight() {
+	return _screenHeight
+}
+
+/**
+ * Get the current screen width
+ * @returns {number} the screen width (in number of characters)
+ */
+export function getScreenWidth() {
+	return _screenWidth
 }
