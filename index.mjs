@@ -1,6 +1,6 @@
 import {
 	initTerminal2DEngine,
-	initKeyboard,
+	initKeyboard
 } from "./engine/terminal-engine.mjs"
 
 async function main() {
