@@ -1,14 +1,12 @@
-const place_snake = { 
-	X: 2,
-	Y: 2
+const position_snake = { 
+	x: 2,
+	y: 2
 }
 
-const DOWN = 'down'
+const PRESS_DOWN = 'down'
 
 export function pressKey(key) {
-	switch (key.name) {
-		case DOWN:
-			place_snake.Y += 1
-			break
+	if (key.name === PRESS_DOWN) {
+		position_snake.y += 1
 	}
 }
