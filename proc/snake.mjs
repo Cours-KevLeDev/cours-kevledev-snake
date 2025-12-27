@@ -14,7 +14,12 @@ export function xySnake() {
 	return position_snake
 }
 
-const PRESS_DOWN = 'down'
+const PRESS_BUTTON = {
+	DOWN: 'down',
+	UP: 'up',
+	LEFT: 'left',
+	RIGHT: 'right'
+}
 
 /**
  * Permet que le Snake bouge quand on saisie une touche du clavier
@@ -22,8 +27,26 @@ const PRESS_DOWN = 'down'
  */
 export function pressDirection(key) {
 	clear()
-	if (key.name === PRESS_DOWN) {
-		position_snake.y += 1
-		drawSnake()
+	switch (key.name) {
+		case PRESS_BUTTON.DOWN:
+			position_snake.y += 1
+			break
+		case PRESS_BUTTON.UP:
+			position_snake.y -= 1
+			break
+		case PRESS_BUTTON.LEFT:
+			position_snake.x -= 2
+			break
+		case PRESS_BUTTON.RIGHT:
+			position_snake.x += 2
+			break
 	}
+	/* [Gestion des collisions des bords du Terminal]
+	if (position_snake.y <= 0) {
+		position_snake.y = 0
+	} else if (position_snake.x <= 0) {
+		position_snake.x = 0
+	}
+	*/
+	drawSnake()
 }
