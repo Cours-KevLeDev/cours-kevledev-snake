@@ -1,9 +1,13 @@
-import { clear } from "../engine/terminal-engine.mjs"
+import { 
+	clear,
+	getScreenWidth,
+	getScreenHeight
+} from "../engine/terminal-engine.mjs"
 import { drawSnake } from "../ui/snake.mjs"
 
 const position_snake = { 
-	x: 2,
-	y: 2
+	x: getScreenWidth()/2,
+	y: getScreenHeight()/2
 }
 
 /**
