@@ -5,7 +5,11 @@ const position_snake = {
 
 const PRESS_DOWN = 'down'
 
-export function pressKey(key) {
+export function xySnake() {
+	return position_snake
+}
+
+export function pressDirection(key) {
 	if (key.name === PRESS_DOWN) {
 		position_snake.y += 1
 	}
