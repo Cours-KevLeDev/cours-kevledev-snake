@@ -1,13 +1,12 @@
 import {
 	initTerminal2DEngine,
-	initKeyboard,
-	onkey
+	initKeyboard
 } from "./engine/terminal-engine.mjs"
-import { pressKey } from "./proc/snake.mjs"
+import { drawSnake } from "./ui/snake.mjs"
 
 async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
-	onkey(pressKey)
+	drawSnake()
 }
 main()
