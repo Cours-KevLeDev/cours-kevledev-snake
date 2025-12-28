@@ -27,7 +27,7 @@ const PRESS_BUTTON = {
 
 /**
  * Permet que le Snake bouge quand on saisie une touche du clavier
- * @param {???} key Saisie d'une touche du clavier
+ * @param {{key: string}} key Saisie d'une touche du clavier
  */
 export function pressDirection(key) {
 	clear()
