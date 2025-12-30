@@ -9,36 +9,39 @@ const position_snake = {
 }
 
 /**
- * Position du Snake
- * @returns Valeurs contenant la position du Snake
+ * 
+ * @returns {x: number, y: number} Position actuel du Snake
  */
-export function xySnake() {
-	return position_snake
+export function positionxy() {
+	return {
+		x: position_snake.x,
+		y: position_snake.y
+	}
 }
 
 /**
- * Ajoute une valeur Y
+ * Fait monter le Snake
  */
 export function moveDown() {
 	position_snake.y += 1
 }
 
 /**
- * Retire une valeur Y
+ * Fait descendre le Snake
  */
 export function moveUp() {
 	position_snake.y -= 1
 }
 
 /**
- * Retire une valeur X
+ * Deplace le Snake a gauche
  */
 export function moveLeft() {
 	position_snake.x -= 2
 }
 
 /**
- * Ajoute une valeur Y
+ * Deplace le Snake a droite
  */
 export function moveRight() {
 	position_snake.x += 2
