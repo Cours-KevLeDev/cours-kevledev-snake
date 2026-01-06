@@ -4,15 +4,15 @@ import {
 } from "../engine/terminal-engine.mjs"
 
 const position_snake = { 
-	x: getScreenWidth()/2,
-	y: getScreenHeight()/2
+	x: Math.ceil(getScreenWidth()/2),
+	y: Math.ceil(getScreenHeight()/2)
 }
 
 /**
  * 
- * @returns {x: number, y: number} Position actuel du Snake
+ * @returns {{x: number, y: number}} Position actuel du Snake
  */
-export function positionxy() {
+export function getPosition() {
 	return {
 		x: position_snake.x,
 		y: position_snake.y
@@ -37,14 +37,14 @@ export function moveUp() {
  * Deplace le Snake a gauche
  */
 export function moveLeft() {
-	position_snake.x -= 2
+	position_snake.x -= 1
 }
 
 /**
  * Deplace le Snake a droite
  */
 export function moveRight() {
-	position_snake.x += 2
+	position_snake.x += 1
 }
 
 /*
