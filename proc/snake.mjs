@@ -2,6 +2,7 @@ import {
 	getScreenWidth,
 	getScreenHeight
 } from "../engine/terminal-engine.mjs"
+import { isWallAt } from "./walls.mjs"
 
 const position_snake = { 
 	x: Math.ceil(getScreenWidth()/2),
@@ -31,6 +32,9 @@ export function moveDown() {
  */
 export function moveUp() {
 	position_snake.y -= 1
+	if (position_snake.y < 0) {
+		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	}
 }
 
 /**
@@ -38,6 +42,9 @@ export function moveUp() {
  */
 export function moveLeft() {
 	position_snake.x -= 1
+	if (position_snake.x < 0) {
+		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	}
 }
 
 /**
@@ -46,14 +53,3 @@ export function moveLeft() {
 export function moveRight() {
 	position_snake.x += 1
 }
-
-/*
-[Gestion des collisions des bords du Terminal]
-export function collisionSnake() {
-	if (position_snake.y <= 0) {
-		position_snake.y = 0
-	} else if (position_snake.x <= 0) {
-		position_snake.x = 0
-	}
-}
-*/
