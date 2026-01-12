@@ -25,8 +25,8 @@ export function getPosition() {
  */
 export function moveDown() {
 	position_snake.y += 1
-	if (position_snake.y > getScreenHeight()) {
-		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall_down') {
+		position_snake.y = getScreenHeight()
 	}
 }
 
@@ -55,7 +55,7 @@ export function moveLeft() {
  */
 export function moveRight() {
 	position_snake.x += 1
-	if (position_snake.x > getScreenWidth()) {
-		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall_right') {
+		position_snake.x = getScreenWidth()
 	}
 }
