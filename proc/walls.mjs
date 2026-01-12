@@ -1,8 +1,9 @@
 export function isWallAt(x, y) {
-	if (x < 0 || y < 0) {
-		return true
+	if (x <= 0) {
+		return 'x_wall'
+	} else if (y <= 0) {
+		return 'y_wall'
 	}
-	return false
 }
 
 /*

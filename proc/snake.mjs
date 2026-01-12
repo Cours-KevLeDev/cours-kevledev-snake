@@ -32,8 +32,8 @@ export function moveDown() {
  */
 export function moveUp() {
 	position_snake.y -= 1
-	if (position_snake.y < 0) {
-		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall') {
+		position_snake.y = 0
 	}
 }
 
@@ -42,8 +42,8 @@ export function moveUp() {
  */
 export function moveLeft() {
 	position_snake.x -= 1
-	if (position_snake.x < 0) {
-		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall') {
+		position_snake.x = 0
 	}
 }
 
