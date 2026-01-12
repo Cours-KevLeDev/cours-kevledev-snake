@@ -1,18 +1,13 @@
+import { getScreenWidth, getScreenHeight } from "../engine/terminal-engine.mjs"
+
 export function isWallAt(x, y) {
 	if (x <= 0) {
-		return 'x_wall'
+		return 'x_wall_left'
+	} else if (x >= getScreenWidth()) {
+		return 'x_wall_right'
 	} else if (y <= 0) {
-		return 'y_wall'
+		return 'y_wall_up'
+	} else if (y >= getScreenHeight()) {
+		return 'y_wall_down'
 	}
 }
-
-/*
-[Gestion des collisions des bords du Terminal]
-export function collisionSnake() {
-	if (position_snake.y <= 0) {
-		position_snake.y = 0
-	} else if (position_snake.x <= 0) {
-		position_snake.x = 0
-	}
-}
-*/

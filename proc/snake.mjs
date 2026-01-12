@@ -21,35 +21,41 @@ export function getPosition() {
 }
 
 /**
- * Fait monter le Snake
+ * Fait descendre le Snake et empeche qu'il depasse le terminal
  */
 export function moveDown() {
 	position_snake.y += 1
+	if (position_snake.y > getScreenHeight()) {
+		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	}
 }
 
 /**
- * Fait descendre le Snake
+ * Fait monter le Snake et empeche qu'il depasse le terminal
  */
 export function moveUp() {
 	position_snake.y -= 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall') {
+	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall_up') {
 		position_snake.y = 0
 	}
 }
 
 /**
- * Deplace le Snake a gauche
+ * Deplace le Snake a gauche et empeche qu'il depasse le terminal
  */
 export function moveLeft() {
 	position_snake.x -= 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall') {
+	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall_left') {
 		position_snake.x = 0
 	}
 }
 
 /**
- * Deplace le Snake a droite
+ * Deplace le Snake a droite et empeche qu'il depasse le terminal
  */
 export function moveRight() {
 	position_snake.x += 1
+	if (position_snake.x > getScreenWidth()) {
+		console.error(new Date().toISOString(),isWallAt(position_snake.x,position_snake.y))
+	}
 }
