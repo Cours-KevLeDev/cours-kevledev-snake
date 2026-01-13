@@ -106,6 +106,9 @@ export function onkey(f) {
  * @param {String} str 
  */
 export function drawString(x, y, str) {
+	// Rounding
+	x = parseInt(x)
+	y = parseInt(y)
 	if (y >= gfxbuffer.length) return
 
 	// On obtient la ligne précise voulue
