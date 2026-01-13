@@ -24,38 +24,40 @@ export function getPosition() {
  * Fait descendre le Snake et empeche qu'il depasse le terminal
  */
 export function moveDown() {
-	position_snake.y += 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall_down') {
-		position_snake.y = getScreenHeight()
+	if (isWallAt(position_snake.x, position_snake.y + 1)) {
+		return
 	}
+	position_snake.y += 1
+
 }
 
 /**
  * Fait monter le Snake et empeche qu'il depasse le terminal
  */
 export function moveUp() {
-	position_snake.y -= 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'y_wall_up') {
-		position_snake.y = 0
+	if (isWallAt(position_snake.x, position_snake.y - 1)) {
+		return
 	}
+	position_snake.y -= 1
 }
 
 /**
  * Deplace le Snake a gauche et empeche qu'il depasse le terminal
  */
 export function moveLeft() {
-	position_snake.x -= 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall_left') {
-		position_snake.x = 0
+	if (isWallAt(position_snake.x - 1, position_snake.y)) {
+		return
 	}
+	position_snake.x -= 1
+
 }
 
 /**
  * Deplace le Snake a droite et empeche qu'il depasse le terminal
  */
 export function moveRight() {
-	position_snake.x += 1
-	if (isWallAt(position_snake.x,position_snake.y) === 'x_wall_right') {
-		position_snake.x = getScreenWidth()
+	if (isWallAt(position_snake.x + 1, position_snake.y)) {
+		return
 	}
+	position_snake.x += 1
 }
