@@ -7,7 +7,7 @@ import {
 	moveDown, moveLeft, moveRight, moveUp
 } from "./proc/snake.mjs"
 import { drawSnake } from "./ui/snake.mjs"
-import { initGame, game_is_loop } from "./proc/game.mjs"
+import { initGame } from "./proc/game.mjs"
 
 const KEY_NAME = {
 	DOWN: 'down',
@@ -43,8 +43,7 @@ async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
 	initGame(true)
-	// drawSnake()
-	// onkey(applyDirection)
-	console.log(game_is_loop)
+	drawSnake()
+	onkey(applyDirection)
 }
 main()
