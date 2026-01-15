@@ -42,7 +42,7 @@ function applyDirection(key) {
 async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
-	initGame(true)
+	initGame(false)
 	drawSnake()
 	onkey(applyDirection)
 }
