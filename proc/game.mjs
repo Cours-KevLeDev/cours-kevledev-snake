@@ -1,11 +1,19 @@
-export let game_is_loop
+let _infiniteMove = false
 
 /**
- * Parametre d'activation si le Snake fait une boucle ou non
- * @param {boolean} infiniteMove Quand on fait une boucle
+ * Fonction d'initiation si le Snake parcours ou non le terminal a l'infini
+ * @param {boolean} infiniteMove Si on reviens a l'opposer du terminal
  */
 export function initGame(infiniteMove) {
 	if (infiniteMove) {
-		game_is_loop = true
-	} else { game_is_loop = false }
+		_infiniteMove = true
+	}
+}
+
+/**
+ * Donne le resultat de: Si le Snake parcours ou non le terminal a l'infini
+ * @returns {boolean} Si on reviens a l'opposer du terminal
+ */
+export function isInfiniteMove() {
+	return _infiniteMove
 }

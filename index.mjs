@@ -10,6 +10,7 @@ import { drawSnake } from "./ui/snake.mjs"
 import { initGame } from "./proc/game.mjs"
 
 const args = process.argv
+const infiniteMove = args[2] === '--infinite-move'
 
 const KEY_NAME = {
 	DOWN: 'down',
@@ -44,9 +45,7 @@ function applyDirection(key) {
 async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
-	if (args[2] === '--infinite-move') {
-		initGame(true)
-	} else { initGame(false) }
+	initGame(infiniteMove)
 	drawSnake()
 	onkey(applyDirection)
 }
