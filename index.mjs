@@ -6,9 +6,8 @@ import {
 import { 
 	moveDown, moveLeft, moveRight, moveUp
 } from "./proc/snake.mjs"
-import { 
-	drawSnake
-} from "./ui/snake.mjs"
+import { drawSnake } from "./ui/snake.mjs"
+import { initGame } from "./proc/game.mjs"
 
 const KEY_NAME = {
 	DOWN: 'down',
@@ -41,8 +40,14 @@ function applyDirection(key) {
 }
 
 async function main() {
+	// Dans la majorité des cas, on ne mets que des fonctions, des constantes et des import
+	// Même pour les arguments (et c'est aussi pour être habitué pour d'autres langages qui ne sont pas comme JS)
+	const args = process.argv
+	const infiniteMove = args[2] === '--infinite-move'
+
 	initTerminal2DEngine()
 	initKeyboard()
+	initGame(infiniteMove)
 	drawSnake()
 	onkey(applyDirection)
 }

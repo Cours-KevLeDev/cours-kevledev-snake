@@ -3,6 +3,7 @@ import {
 	getScreenHeight
 } from "../engine/terminal-engine.mjs"
 import { isWallAt } from "./walls.mjs"
+import { isInfiniteMove } from "./game.mjs"
 
 const position_snake = { 
 	x: Math.ceil(getScreenWidth()/2),
@@ -10,8 +11,8 @@ const position_snake = {
 }
 
 /**
- * 
- * @returns {{x: number, y: number}} Position actuel du Snake
+ * Obtient la position actuelle du snake
+ * @returns {{x: number, y: number}} Position x et y du Snake
  */
 export function getPosition() {
 	return {
@@ -21,43 +22,70 @@ export function getPosition() {
 }
 
 /**
- * Fait descendre le Snake et empeche qu'il depasse le terminal
+ * Fait descendre le Snake
+ * Si la prochaine position est un mur, le snake ne bougera pas
+ * Si `infiniteMove` est à `true` alors le snake se téléportera à la position opposée.
  */
 export function moveDown() {
-	if (isWallAt(position_snake.x, position_snake.y + 1)) {
+	const isWallNext = isWallAt(position_snake.x, position_snake.y + 1)
+	if (isWallNext && !isInfiniteMove()) {
 		return
 	}
-	position_snake.y += 1
-
+	if (isWallNext) {
+		// Ne peut arriver que si isInfiniteMove est true, car on a géré le cas contraire avant
+		position_snake.y = 0
+	} else {
+		position_snake.y += 1
+	}
 }
 
 /**
- * Fait monter le Snake et empeche qu'il depasse le terminal
+ * Fait monter le Snake
+ * Si la prochaine position est un mur, le snake ne bougera pas
+ * Si `infiniteMove` est à `true` alors le snake se téléportera à la position opposée.
  */
 export function moveUp() {
-	if (isWallAt(position_snake.x, position_snake.y - 1)) {
+	const isWallNext = isWallAt(position_snake.x, position_snake.y - 1)
+	if (isWallNext && !isInfiniteMove()) {
 		return
 	}
-	position_snake.y -= 1
+	if (isWallNext) {
+		position_snake.y = getScreenHeight()
+	} else {
+		position_snake.y -= 1
+	}
 }
 
 /**
- * Deplace le Snake a gauche et empeche qu'il depasse le terminal
+ * Deplace le Snake a gauche
+ * Si la prochaine position est un mur, le snake ne bougera pas
+ * Si `infiniteMove` est à `true` alors le snake se téléportera à la position opposée.
  */
 export function moveLeft() {
-	if (isWallAt(position_snake.x - 1, position_snake.y)) {
+	const isWallNext = isWallAt(position_snake.x - 1, position_snake.y)
+	if (isWallNext && !isInfiniteMove()) {
 		return
 	}
-	position_snake.x -= 1
-
+	if (isWallNext) {
+		position_snake.x = getScreenWidth()
+	} else {
+		position_snake.x -= 1
+	}
 }
 
 /**
- * Deplace le Snake a droite et empeche qu'il depasse le terminal
+ * Deplace le Snake a droite
+ * Si la prochaine position est un mur, le snake ne bougera pas
+ * Si `infiniteMove` est à `true` alors le snake se téléportera à la position opposée.
  */
 export function moveRight() {
-	if (isWallAt(position_snake.x + 1, position_snake.y)) {
+	const isWallNext = isWallAt(position_snake.x + 1, position_snake.y)
+	if (isWallNext && !isInfiniteMove()) {
 		return
 	}
-	position_snake.x += 1
+	if (isWallNext) {
+		position_snake.x = 0
+	} else {
+		position_snake.x += 1
+	}
 }
