@@ -1,8 +1,8 @@
 let _infiniteMove = false
 
 /**
- * Fonction d'initiation si le Snake parcours ou non le terminal a l'infini
- * @param {boolean} infiniteMove Si on reviens a l'opposer du terminal
+ * Fonction d'initiation des paramètres du jeu du Snake
+ * @param {boolean} infiniteMove Déplace à l'infini le snake si on dépasse l'écran
  */
 export function initGame(infiniteMove) {
 	if (infiniteMove) {
@@ -11,8 +11,8 @@ export function initGame(infiniteMove) {
 }
 
 /**
- * Donne le resultat de: Si le Snake parcours ou non le terminal a l'infini
- * @returns {boolean} Si on reviens a l'opposer du terminal
+ * Indique si le paramètre de déplacement infini du snake est activé ou non 
+ * @returns {boolean} true si le déplacement est infini, false sinon
  */
 export function isInfiniteMove() {
 	return _infiniteMove
