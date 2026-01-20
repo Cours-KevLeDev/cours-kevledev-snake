@@ -36,7 +36,6 @@ export function moveDown() {
 	} else {
 		position_snake.y += 1
 	}
-	console.error(new Date().toISOString(), position_snake.y)
 }
 
 /**
@@ -45,7 +44,7 @@ export function moveDown() {
  * Si `infiniteMove` est à `true` alors le snake se téléportera à la position opposée.
  */
 export function moveUp() {
-	const isWallNext = isWallAt(position_snake.x, position_snake.y)
+	const isWallNext = isWallAt(position_snake.x, position_snake.y - 1)
 	if (isWallNext && !isInfiniteMove()) {
 		return
 	}
@@ -54,7 +53,6 @@ export function moveUp() {
 	} else {
 		position_snake.y -= 1
 	}
-	console.error(new Date().toISOString(), position_snake.y)
 }
 
 /**
