@@ -32,7 +32,6 @@ export function moveDown() {
 		return
 	}
 	if (isWallNext) {
-		// Ne peut arriver que si isInfiniteMove est true, car on a géré le cas contraire avant
 		position_snake.y = 0
 	} else {
 		position_snake.y += 1
@@ -50,7 +49,7 @@ export function moveUp() {
 		return
 	}
 	if (isWallNext) {
-		position_snake.y = getScreenHeight()
+		position_snake.y = getScreenHeight() - 1
 	} else {
 		position_snake.y -= 1
 	}
@@ -67,7 +66,7 @@ export function moveLeft() {
 		return
 	}
 	if (isWallNext) {
-		position_snake.x = getScreenWidth()
+		position_snake.x = getScreenWidth() - 1
 	} else {
 		position_snake.x -= 1
 	}
