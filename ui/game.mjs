@@ -1,13 +1,20 @@
-import { initTerminal2DEngine, initKeyboard, drawString } from "../engine/terminal-engine.mjs";
+import { initTerminal2DEngine, initKeyboard, drawString, getScreenHeight, getScreenWidth } from "../engine/terminal-engine.mjs";
+
+const MENU_OPTION = {
+	M_Normal: 'Mode: Normal',
+	M_Infini: 'Mode: Déplacement Infini'
+}
+
+const position_option = { 
+	x: Math.ceil((getScreenWidth()/2)-(MENU_OPTION.M_Normal.length/2)),
+	y: Math.ceil(getScreenHeight()/2)
+}
+
+function drawMenuMode() {
+	drawString(position_option.x,position_option.y,MENU_OPTION.M_Normal)
+	drawString(position_option.x,position_option.y+1,MENU_OPTION.M_Infini)
+}
 
 initTerminal2DEngine()
 initKeyboard()
-function drawMenuMode() {
-	const MENU_OPTION = {
-		M_Normal: 'Mode: Normal',
-		M_Infini: 'Mode: Déplacement Infini'
-	}
-	drawString(5,3,MENU_OPTION.M_Normal)
-	drawString(5,5,MENU_OPTION.M_Infini)
-}
 drawMenuMode()
