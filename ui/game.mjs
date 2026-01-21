@@ -11,6 +11,7 @@ const position_option = {
 }
 
 function drawMenuMode() {
+	drawString(position_option.x-2,position_option.y,'•')
 	drawString(position_option.x,position_option.y,MENU_OPTION.M_Normal)
 	drawString(position_option.x,position_option.y+1,MENU_OPTION.M_Infini)
 }
