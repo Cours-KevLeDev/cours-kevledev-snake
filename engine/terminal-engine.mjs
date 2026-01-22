@@ -107,7 +107,6 @@ export async function waitOnceKey(f) {
 	let _resolve
 	const callback = async (_, key) => {
 		const resolved = await f(key)
-		console.error(resolved, key)
 		if (resolved && _resolve) {
 			// To prevent calling twice resolve
 			_resolve()
