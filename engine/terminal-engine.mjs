@@ -100,6 +100,30 @@ export function onkey(f) {
 }
 
 /**
+ * Wait for a specific key, that will be checked inside function
+ * @param {Function} f Function that will be executed, with its 1st parameter as the key, should return a boolean true/false
+ */
+export async function waitOnceKey(f) {
+	let _resolve
+	const callback = async (_, key) => {
+		const resolved = await f(key)
+		console.error(resolved, key)
+		if (resolved && _resolve) {
+			// To prevent calling twice resolve
+			_resolve()
+			_resolve = null
+		}
+	}
+	const pr = new Promise(resolve => {
+		_resolve = resolve
+	})
+	process.stdin.on('keypress', callback)
+	await pr
+	process.stdin.off('keypress', callback)
+}
+
+
+/**
  * Draw a string at a specific point in the console
  * @param {number} x 
  * @param {number} y 
