@@ -7,6 +7,11 @@ import {
 	moveDown, moveLeft, moveRight, moveUp
 } from "./proc/snake.mjs"
 import { drawSnake } from "./ui/snake.mjs"
+import {
+	actionOnInfiniteMenuSelection,
+	drawMenuMode
+} from "./ui/game.mjs"
+
 import { initGame } from "./proc/game.mjs"
 
 const KEY_NAME = {
@@ -39,16 +44,32 @@ function applyDirection(key) {
 	drawSnake()
 }
 
-async function main() {
-	// Dans la majorité des cas, on ne mets que des fonctions, des constantes et des import
-	// Même pour les arguments (et c'est aussi pour être habitué pour d'autres langages qui ne sont pas comme JS)
-	const args = process.argv
-	const infiniteMove = args[2] === '--infinite-move'
 
-	initTerminal2DEngine()
-	initKeyboard()
-	initGame(infiniteMove)
+/**
+ * Détection des entrées pour le menu de sélection
+ * - Haut/Bas pour naviguer
+ * - Espace/Entrée pour valider
+ * @param {{name: string}} key Le nom de la touche du clavier 
+ * @returns {boolean} Si la validation a été activée
+ */
+async function onkeyInfiniteModeMenu(key) {
+	switch (key.name) {
+		case KEY_NAME.DOWN:
+			actionOnInfiniteMenuSelection('down')
+			break
+		case KEY_NAME.UP:
+			actionOnInfiniteMenuSelection('up')
+			break
+	}
+}
+
 	drawSnake()
 	onkey(applyDirection)
 }
+
+async function main() {
+	drawMenuMode()
+	onkey(onkeyInfiniteModeMenu)
+}
+
 main()
