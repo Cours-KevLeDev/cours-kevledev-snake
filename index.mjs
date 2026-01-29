@@ -1,7 +1,8 @@
 import {
 	initTerminal2DEngine, initKeyboard,
 	onkey,
-	clear
+	clear,
+	waitOnceKey
 } from "./engine/terminal-engine.mjs"
 import { 
 	moveDown, moveLeft, moveRight, moveUp
@@ -9,6 +10,7 @@ import {
 import { drawSnake } from "./ui/snake.mjs"
 import {
 	actionOnInfiniteMenuSelection,
+	getInfiniteModeCurrentSelection,
 	drawMenuMode
 } from "./ui/game.mjs"
 
@@ -18,7 +20,9 @@ const KEY_NAME = {
 	DOWN: 'down',
 	UP: 'up',
 	LEFT: 'left',
-	RIGHT: 'right'
+	RIGHT: 'right',
+	SPACE: 'space',
+	ENTER: 'return'
 }
 
 /**
@@ -44,7 +48,6 @@ function applyDirection(key) {
 	drawSnake()
 }
 
-
 /**
  * Détection des entrées pour le menu de sélection
  * - Haut/Bas pour naviguer
@@ -60,16 +63,38 @@ async function onkeyInfiniteModeMenu(key) {
 		case KEY_NAME.UP:
 			actionOnInfiniteMenuSelection('up')
 			break
+		case KEY_NAME.SPACE:
+		case KEY_NAME.ENTER:
+			return true
 	}
 }
 
+/**
+ * Menu de sélection du mode infini
+ * @returns {Promise<{infiniteMode: boolean}>}
+ */
+async function selectInfiniteMode() {
+	clear()
+	drawMenuMode()
+	await waitOnceKey(onkeyInfiniteModeMenu)
+	return getInfiniteModeCurrentSelection()
+}
+
+/**
+ * Démarre le jeu
+ */
+function startGame() {
+	clear()
 	drawSnake()
 	onkey(applyDirection)
 }
 
 async function main() {
-	drawMenuMode()
-	onkey(onkeyInfiniteModeMenu)
+	initTerminal2DEngine()
+	initKeyboard()
+	const infiniteMode = await selectInfiniteMode()
+	initGame(infiniteMode)
+	startGame()
 }
 
 main()

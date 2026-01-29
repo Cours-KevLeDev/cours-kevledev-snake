@@ -60,3 +60,10 @@ export async function actionOnInfiniteMenuSelection(action) {
 	drawInfiniteModeCursor()
 }
 
+/**
+ * Récupère l'option sélectionnée dans le menu mode infini
+ * @returns {boolean} Si le mode infini est sélectionné
+ */
+export function getInfiniteModeCurrentSelection() {
+	return infiniteModeSelected === 1 
+}
