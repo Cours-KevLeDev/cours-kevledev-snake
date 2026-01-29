@@ -4,6 +4,21 @@ import {
 	getScreenHeight
 } from "../engine/terminal-engine.mjs"
 
+const INFINITE_MODE_OPTIONS = ['Mode: Normal', 'Mode: Déplacement Infini']
+let infiniteModeSelected = 0
+
+/**
+ * Dessine le curseur du menu
+ * Rafraichit automatiquement en supprimant à l'ancienne position
+ */
+function drawInfiniteModeCursor() {
+	const pos = getInfiniteModeMenuPos()
+	const y = pos.y + infiniteModeSelected
+	const x = pos.x - 2
+	drawString(x, y, '•')
+}
+
+
 /**
  * Position du menu (centré au milieu de l'écran)
  * @returns {{x: number, y: number}} Position du menu
@@ -23,5 +38,6 @@ export function drawMenuMode() {
 	// On pourrait faire une boucle
 	drawString(pos.x, pos.y, INFINITE_MODE_OPTIONS[0])
 	drawString(pos.x, pos.y+1 ,INFINITE_MODE_OPTIONS[1])
+	drawInfiniteModeCursor()
 }
 
