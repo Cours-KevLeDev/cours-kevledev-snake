@@ -2,7 +2,8 @@ import {
 	initTerminal2DEngine, initKeyboard,
 	onkey,
 	clear,
-	waitOnceKey
+	waitOnceKey,
+	destroy
 } from "./engine/terminal-engine.mjs"
 import { 
 	moveDown, moveLeft, moveRight, moveUp
@@ -22,7 +23,9 @@ const KEY_NAME = {
 	LEFT: 'left',
 	RIGHT: 'right',
 	SPACE: 'space',
-	ENTER: 'return'
+	ENTER: 'return',
+	ESCAPE: 'escape'
+
 }
 
 /**
@@ -44,6 +47,9 @@ function applyDirection(key) {
 		case KEY_NAME.RIGHT:
 			moveRight()
 			break
+		case KEY_NAME.ESCAPE:
+			destroy()
+			process.exit()
 	}
 	drawSnake()
 }
@@ -66,6 +72,9 @@ async function onkeyInfiniteModeMenu(key) {
 		case KEY_NAME.SPACE:
 		case KEY_NAME.ENTER:
 			return true
+		case KEY_NAME.ESCAPE:
+			destroy()
+			process.exit()
 	}
 }
 
