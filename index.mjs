@@ -49,10 +49,12 @@ function applyDirection(key) {
 			break
 		case KEY_NAME.ESCAPE:
 			destroy()
-			process.exit()
+			return true
 	}
 	drawSnake()
 }
+
+let exit_in_menu = false
 
 /**
  * Détection des entrées pour le menu de sélection
@@ -73,6 +75,7 @@ async function onkeyInfiniteModeMenu(key) {
 		case KEY_NAME.ENTER:
 			return true
 		case KEY_NAME.ESCAPE:
+			exit_in_menu = true
 			destroy()
 			process.exit()
 	}
@@ -86,24 +89,26 @@ async function selectInfiniteMode() {
 	clear()
 	drawMenuMode()
 	await waitOnceKey(onkeyInfiniteModeMenu)
-	return getInfiniteModeCurrentSelection()
+	return { InfiniteModeSelection: getInfiniteModeCurrentSelection(), GetExit: exit_in_menu } 
 }
 
 /**
  * Démarre le jeu
  */
-function startGame() {
+async function startGame() {
 	clear()
 	drawSnake()
-	onkey(applyDirection)
+	await waitOnceKey(applyDirection)
 }
 
 async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
-	const infiniteMode = await selectInfiniteMode()
-	initGame(infiniteMode)
-	startGame()
+	while (!exit_in_menu) {
+		const infiniteMode = await selectInfiniteMode()
+		initGame(infiniteMode.InfiniteModeSelection)
+		await startGame()
+	}
 }
 
 main()
