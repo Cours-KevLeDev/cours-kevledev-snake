@@ -63,7 +63,7 @@ let exit_in_menu = false
  * @param {{name: string}} key Le nom de la touche du clavier 
  * @returns {boolean} Si la validation a été activée
  */
-async function onkeyInfiniteModeMenu(key) {
+function onkeyInfiniteModeMenu(key) {
 	switch (key.name) {
 		case KEY_NAME.DOWN:
 			actionOnInfiniteMenuSelection('down')
@@ -76,8 +76,7 @@ async function onkeyInfiniteModeMenu(key) {
 			return true
 		case KEY_NAME.ESCAPE:
 			exit_in_menu = true
-			destroy()
-			process.exit()
+			return true
 	}
 }
 
@@ -89,7 +88,7 @@ async function selectInfiniteMode() {
 	clear()
 	drawMenuMode()
 	await waitOnceKey(onkeyInfiniteModeMenu)
-	return { InfiniteModeSelection: getInfiniteModeCurrentSelection(), GetExit: exit_in_menu } 
+	return { infiniteMode: getInfiniteModeCurrentSelection(), shouldExit: exit_in_menu } 
 }
 
 /**
@@ -105,10 +104,14 @@ async function main() {
 	initTerminal2DEngine()
 	initKeyboard()
 	while (!exit_in_menu) {
-		const infiniteMode = await selectInfiniteMode()
-		initGame(infiniteMode.InfiniteModeSelection)
-		await startGame()
+		const { infiniteMode, shouldExit } = await selectInfiniteMode()
+		if (!shouldExit) {
+			initGame(infiniteMode)
+			await startGame()
+		}
 	}
+	destroy()
+	process.exit()
 }
 
 main()
