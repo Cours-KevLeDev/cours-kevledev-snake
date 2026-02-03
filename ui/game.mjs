@@ -4,19 +4,26 @@ import {
 	getScreenHeight
 } from "../engine/terminal-engine.mjs"
 
-const INFINITE_MODE_OPTIONS = ['Mode: Normal', 'Mode: Déplacement Infini']
+const INFINITE_MODE_OPTIONS = [
+	'Mode: Normal', 
+	'Mode: Déplacement Infini',
+	'Quitter'
+]
 let infiniteModeSelected = 0
 
 /**
  * Dessine le curseur du menu
  * Rafraichit automatiquement en supprimant à l'ancienne position
  */
-function drawInfiniteModeCursor() {
+function drawInfiniteModeCursor(previousInfiniteModeSelected) {
 	const pos = getInfiniteModeMenuPos()
 	const y = pos.y + infiniteModeSelected
 	const x = pos.x - 2
-	const prevY = pos.y + (infiniteModeSelected === 0 ? 1 : 0)
-	drawString(x, prevY, ' ')
+	
+	if (previousInfiniteModeSelected !== undefined) {
+		const prevY = pos.y + previousInfiniteModeSelected
+		drawString(x, prevY, ' ')
+	}
 	drawString(x, y, '•')
 }
 
@@ -36,9 +43,11 @@ function getInfiniteModeMenuPos() {
  */
 export function drawMenuMode() {
 	const pos = getInfiniteModeMenuPos()
-	// On pourrait faire une boucle
-	drawString(pos.x, pos.y, INFINITE_MODE_OPTIONS[0])
-	drawString(pos.x, pos.y+1 ,INFINITE_MODE_OPTIONS[1])
+
+	for (let i = 0; i < INFINITE_MODE_OPTIONS.length; i++) {
+		drawString(pos.x, pos.y + i, INFINITE_MODE_OPTIONS[i])
+	}
+
 	drawInfiniteModeCursor()
 }
 
@@ -47,17 +56,18 @@ export function drawMenuMode() {
  * Action à effectuer lors de la sélection dans le menu mode infini
  * @param {'up'|'down'} action 
  */
-export async function actionOnInfiniteMenuSelection(action) {
+export function actionOnInfiniteMenuSelection(action) {
+	const previousInfiniteModeSelected = infiniteModeSelected
 	switch (action) {
 		case 'up':
-			infiniteModeSelected = (infiniteModeSelected - 1) % INFINITE_MODE_OPTIONS.length
+			infiniteModeSelected = infiniteModeSelected - 1
 			if (infiniteModeSelected < 0) infiniteModeSelected = INFINITE_MODE_OPTIONS.length - 1
 			break
 		case 'down':
 			infiniteModeSelected = (infiniteModeSelected + 1) % INFINITE_MODE_OPTIONS.length
 			break
 	}
-	drawInfiniteModeCursor()
+	drawInfiniteModeCursor(previousInfiniteModeSelected)
 }
 
 /**
