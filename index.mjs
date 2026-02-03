@@ -1,6 +1,5 @@
 import {
 	initTerminal2DEngine, initKeyboard,
-	onkey,
 	clear,
 	waitOnceKey,
 	destroy
@@ -12,6 +11,7 @@ import { drawSnake } from "./ui/snake.mjs"
 import {
 	actionOnInfiniteMenuSelection,
 	getInfiniteModeCurrentSelection,
+	getExitModeCurrentSelection,
 	drawMenuMode
 } from "./ui/game.mjs"
 
@@ -72,6 +72,9 @@ function onkeyInfiniteModeMenu(key) {
 			break
 		case KEY_NAME.SPACE:
 		case KEY_NAME.ENTER:
+			if (getExitModeCurrentSelection()) {
+				exit_in_menu = true
+			}
 			return true
 		case KEY_NAME.ESCAPE:
 			exit_in_menu = true

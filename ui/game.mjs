@@ -75,5 +75,9 @@ export function actionOnInfiniteMenuSelection(action) {
  * @returns {boolean} Si le mode infini est sélectionné
  */
 export function getInfiniteModeCurrentSelection() {
-	return infiniteModeSelected === 1 
+	return infiniteModeSelected === 1
+}
+
+export function getExitModeCurrentSelection() {
+	return infiniteModeSelected === 2
 }
