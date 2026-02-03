@@ -48,7 +48,6 @@ function applyDirection(key) {
 			moveRight()
 			break
 		case KEY_NAME.ESCAPE:
-			destroy()
 			return true
 	}
 	drawSnake()
